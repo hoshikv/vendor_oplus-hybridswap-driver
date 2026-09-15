@@ -141,7 +141,11 @@ static void wake_all_swapd(void);
 #ifdef CONFIG_OPLUS_JANK
 extern u32 get_cpu_load(u32 win_cnt, struct cpumask *mask);
 #endif
+#ifndef CONFIG_OPLUS_FEATURE_UXMEM_OPT
+static inline bool is_fg(int uid) { return false; }
+#else
 extern bool is_fg(int uid);
+#endif
 static inline bool current_is_hybrid_swapd(void)
 {
 	return current->pid == swapd_pid;
