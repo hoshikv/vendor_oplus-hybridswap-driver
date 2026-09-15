@@ -12,6 +12,12 @@
 #include <linux/device.h>
 #include <linux/memcontrol.h>
 
+/* OPLOS kernel adds PANEL_EVENT_NOTIFIER_CLIENT_MM to the qcom enum; GKI
+ * kernels omit it. Give it a unique value when absent. */
+#ifndef PANEL_EVENT_NOTIFIER_CLIENT_MM
+#define PANEL_EVENT_NOTIFIER_CLIENT_MM 100
+#endif
+
 #define EXTENT_SHIFT        15
 #define EXTENT_SIZE         (1UL << EXTENT_SHIFT)
 #define EXTENT_PG_CNT		(EXTENT_SIZE >> PAGE_SHIFT)
