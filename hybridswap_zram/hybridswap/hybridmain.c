@@ -322,6 +322,19 @@ static inline bool current_is_key_task(void)
 }
 #endif /* CONFIG_OPLUS_FEATURE_UXMEM_OPT */
 
+/*
+ * GKI kernels do not carry the OPPO/OPLUS si_meminfo_adjust behavior codes;
+ * android_vh_si_meminfo_adjust only forwards (totalram, freeram) pointers
+ * here, so none of the cases below can match and the hook is a no-op.
+ */
+#ifndef OPLUS_MM_VH_CURRENT_IS_UX
+enum {
+	OPLUS_MM_VH_CURRENT_IS_UX = 0,
+	OPLUS_MM_VH_FREE_ZRAM_IS_OK = 1,
+	OPLUS_MM_VH_CURRENT_IS_KEY = 2,
+};
+#endif
+
 static void oplus_mm_common_hook(void *unused, unsigned long *behavior, unsigned long *output)
 {
 	switch ((unsigned long)behavior) {
